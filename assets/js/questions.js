@@ -1,4 +1,4 @@
-var questions = [
+var questionsArray = [
     {
         Question: "The condition in an if / else statment is enclosed within _______.",
         choices: ["parentheses", "quotes", "curly brackets", "square brackets"],

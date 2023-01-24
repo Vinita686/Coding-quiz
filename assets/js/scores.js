@@ -7,8 +7,8 @@ let preSavedScore = JSON.parse(localStorage.getItem("score"))
 console.log(preSavedScore);
 
 //create list of saved highscores
-preSavedScore.array.forEach((element) => {
-  let liTags = document.createElement("li");
-  liTags.textContent =
+// preSavedScore.array.forEach((element) => {
+//   let liTags = document.createElement("li");
+//   liTags.textContent =
   
-});
+// });
