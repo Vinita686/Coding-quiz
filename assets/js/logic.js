@@ -3,7 +3,7 @@ var startBtn = document.getElementById('start');
 var timeEl = document.getElementById('time');
 var screenEl = document.getElementById('start-screen');
 var questionsEl = document.getElementById('questions');
-var questionToAsk = document.getElementById('question-title');
+var questionTitle = document.getElementById('question-title');
 var choiceOfAnswer = document.getElementById('choices');
 var endScreenEl = document.getElementById('end-screen');
 var finalScore = document.getElementById('final-score');
@@ -12,46 +12,83 @@ var submitBtn = document.getElementById('submit');
 var feedbackEl = document.getElementById('feedback');
 
 
-var counter = questionsArray.length*15;
+let counter = questionsArray.length*15;
 let questionIndex = 0;
+let score = 0;
+let btn = [];
 
-//function to show questions
+//function to show a question
 function displayQuestion() {
-//Get current question from the questions array
-    var currentQuestion = questionsArray[questionIndex];
-//populate questionToAsk with question    
-    questionToAsk.textContent = currentQuestion.Question;
+ // console.log(questionIndex);
+  choiceOfAnswer.innerHTML = '';
+  feedbackEl.innerHTML = "";
+ // feedbackEl.classList.remove('show');
+ //Get current question from the questions array
+  var currentQuestion = questionsArray[questionIndex];
 
-//loop over choices for answer
-currentQuestion.choices.forEach(function(choice, i) {
-    var choiceList = document.createElement("button");
-    choiceList.setAttribute('class', 'choice');
-    choiceList.setAttribute('value', choice);
-    choiceList.textContent = i + 1 + "." + choice;
+ //populate questionTitle with question    
+  questionTitle.textContent = currentQuestion.question;
+ // console.log(questionTitle)
 
-    //attach click event listner to each choice for answer
-    // choiceList.onclick = optionsClick;
-    choiceOfAnswer.appendChild(choiceList);
+ //loop over choices for answer
+ currentQuestion.choices.forEach(function(option, i) {
+ //create button to each option
+    btn[i]= document.createElement("button");
+    btn[i].textContent = i + 1 + "." + option;
+    btn[i].setAttribute('value', option);
+    choiceOfAnswer.appendChild(btn[i]);
+
+ //attach click event listner to each choice for answer
+    btn[i].addEventListener('click', function(event) {
+ 
     
-});
+    //display the feedback
+        feedbackEl.setAttribute('class', 'show');
+        if(event.target.value === currentQuestion.answer) {
+            feedbackEl.textContent = "Correct!";
+         }else {
+            feedbackEl.textContent = "Wrong!";
+    
+           }
+           if(questionIndex !== questionsArray.length) {
+            setTimeout(displayQuestion, 1000);
+            questionIndex++;
+            }
+    //call dispaly last page
+        
+        // feedbackEl.setAttribute('class', 'hide');
+       
+    }
+    
+)
+
+  });
+}
+//function to validate the question
+function checkQuestion() {
+    
 }
 
 //function to start the quiz 
-function startQuiz() {
-    //hide start screen
+   function startQuiz() {
+
+//hide start screen
     screenEl.setAttribute('class', 'hide');
 
-    //show questions screen
+//show questions screen
     questionsEl.setAttribute('class', 'show');
     displayQuestion();
-}
-    var timeInterval = setInterval(function() {
+    timeEl.textContent = counter;
+//start timer
+   var timeInterval = setInterval(function() {
         timeEl.textContent = counter;
+        counter--;
+        if (timeEl < 0) {
+            clearInterval(timeInterval);
+        }
+       
+}, 1000)
 
-
-    }
-    )
-
-
-startBtn.onclick = startQuiz;
-
+};
+        
+startBtn.addEventListener('click', startQuiz);
