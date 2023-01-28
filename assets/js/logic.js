@@ -28,10 +28,8 @@ function displayQuestion() {
     questionTitle.textContent = currentQuestion.question;
     } else {
     questionTitle.textContent = '';
-    questionsEl.setAttribute('class', 'hide')
-    feedbackEl.setAttribute('class', 'hide')
-    endScreenEl.setAttribute('class', 'show');
-  }  
+    endQuiz();
+   }  
 
    //loop over choices for answer
     currentQuestion.choices.forEach(function(option, i) {
@@ -42,15 +40,16 @@ function displayQuestion() {
      choiceOfAnswer.appendChild(btn[i]);
 
          //attach click event listner to each choice for answer
-        btn[i].addEventListener('click', function(event) {
+      btn[i].addEventListener('click', function(event) {
 
          //display the feedback
-          feedbackEl.setAttribute('class', 'show');
-          if(event.target.value !== currentQuestion.answer) {
-            feedbackEl.textContent = "Wrong!";
-            counter -= 10;
-         }else {
+      feedbackEl.setAttribute('class', 'show');
+      if(event.target.value !== currentQuestion.answer) {
+        feedbackEl.textContent = "Wrong!";
+        counter -= 10;
+        }else {
             feedbackEl.textContent = "Right!";
+            score++;
             }
             setTimeout(displayQuestion, 1000);
             questionIndex++;
@@ -70,10 +69,20 @@ function startQuiz() {
  var timeInterval = setInterval(function() {
      timeEl.textContent = counter;
      counter--;
-      if (timeEl < 0) {
+      if (counter < 0) {
             clearInterval(timeInterval);
         }
     }, 1000)
 };
+
+function endQuiz() {
+  if (questionIndex === questionsArray.length || counter === 0) {
+    counter = "";
+    questionsEl.setAttribute('class', 'hide')
+    feedbackEl.setAttribute('class', 'hide')
+    endScreenEl.setAttribute('class', 'show');
+    finalScore.textContent = score + "/" + questionsArray.length;
+  }
+}
         
 startBtn.addEventListener('click', startQuiz);
