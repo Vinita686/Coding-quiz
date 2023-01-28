@@ -11,7 +11,6 @@ var initials = document.getElementById('initials');
 var submitBtn = document.getElementById('submit');
 var feedbackEl = document.getElementById('feedback');
 
-
 let counter = questionsArray.length*15;
 let questionIndex = 0;
 let score = 0;
@@ -39,10 +38,10 @@ function displayQuestion() {
      btn[i].setAttribute('value', option);
      choiceOfAnswer.appendChild(btn[i]);
 
-         //attach click event listner to each choice for answer
-      btn[i].addEventListener('click', function(event) {
+     //attach click event listner to each choice for answer
+     btn[i].addEventListener('click', function(event) {
 
-         //display the feedback
+     //display the feedback
       feedbackEl.setAttribute('class', 'show');
       if(event.target.value !== currentQuestion.answer) {
         feedbackEl.textContent = "Wrong!";
@@ -58,7 +57,7 @@ function displayQuestion() {
 }
 
 //function to start the quiz
-function startQuiz() {
+ function startQuiz() {
  //hide start screen
  screenEl.setAttribute('class', 'hide');
  //show questions screen
@@ -67,10 +66,10 @@ function startQuiz() {
  timeEl.textContent = counter;
  //start timer
  var timeInterval = setInterval(function() {
-     timeEl.textContent = counter;
-     counter--;
-      if (counter < 0) {
-            clearInterval(timeInterval);
+    timeEl.textContent = counter;
+    counter--;
+    if (counter < 0) {
+        clearInterval(timeInterval);
         }
     }, 1000)
 };
@@ -84,5 +83,35 @@ function endQuiz() {
     finalScore.textContent = score + "/" + questionsArray.length;
   }
 }
-        
+//function to validate input of initials to only alphabets
+function lettersOnlyCheck(name)
+{
+   var regEx = /^[A-Za-z]+$/;
+   if(name.value.match(regEx))
+     {
+      return true;
+     }
+   else
+     {
+     alert("Please enter letters only.");
+     return false;
+     }
+}     
+//capture final score and initials and store them to local storage
+function saveScore() {
+  var playerDetails = {
+    initials: initials.value.trim(),
+    score: score
+  };
+  console.log(playerDetails);
+  //check if input in initaials is not empty
+  if (initials === null) {
+    
+  localStorage.setItem('playerDetails', JSON.stringify(playerDetails));
+  endScreenEl.setAttribute('class', 'hide');
+  feedbackEl.setAttribute('class', 'feedback show');
+  feedbackEl.textContent = "Thanks! Click 'View Highscores' to see the highscore";
+  }
+}
+submitBtn.onclick = saveScore;
 startBtn.addEventListener('click', startQuiz);
