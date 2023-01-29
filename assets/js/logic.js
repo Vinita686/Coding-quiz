@@ -7,7 +7,7 @@ var questionTitle = document.getElementById('question-title');
 var choiceOfAnswer = document.getElementById('choices');
 var endScreenEl = document.getElementById('end-screen');
 var finalScore = document.getElementById('final-score');
-var initials = document.getElementById('initials');
+var initialsEl = document.getElementById('initials');
 var submitBtn = document.getElementById('submit');
 var feedbackEl = document.getElementById('feedback');
 
@@ -84,10 +84,9 @@ function endQuiz() {
   }
 }
 //function to validate input of initials to only alphabets
-function lettersOnlyCheck(name)
-{
+function lettersOnlyCheck(input) {
    var regEx = /^[A-Za-z]+$/;
-   if(name.value.match(regEx))
+   if(input.value.match(regEx))
      {
       return true;
      }
@@ -96,22 +95,36 @@ function lettersOnlyCheck(name)
      alert("Please enter letters only.");
      return false;
      }
-}     
+};   
 //capture final score and initials and store them to local storage
-function saveScore() {
-  var playerDetails = {
-    initials: initials.value.trim(),
-    score: score
-  };
-  console.log(playerDetails);
-  //check if input in initaials is not empty
-  if (initials === null) {
-    
-  localStorage.setItem('playerDetails', JSON.stringify(playerDetails));
-  endScreenEl.setAttribute('class', 'hide');
-  feedbackEl.setAttribute('class', 'feedback show');
-  feedbackEl.textContent = "Thanks! Click 'View Highscores' to see the highscore";
+submitBtn.addEventListener('click', function(event){
+  event.preventDefault();
+
+  //take input from initial element
+  var initials = initialsEl.value.trim();
+  //check if input in initaials is not empty and only accept alphbets
+  if (initials == "" || lettersOnlyCheck(initialsEl), true){
+    let saveScores = JSON.parse(localStorage.getItem("scoreDetail"));
+    console.log(saveScores);
+    if (saveScores === null) {
+        saveScores = [];
+    }
+    var userInputs = {
+      Initials: initials,
+      Score: score
+    };
+
+    saveScores.push(userInputs);
+    // console.log(highScoreArray);
+    localStorage.setItem("scoreDetail", JSON.stringify(saveScores));
+    endScreenEl.setAttribute('class', 'hide');
+    feedbackEl.setAttribute('class', 'feedback show');
+    feedbackEl.textContent = "Thanks! Click 'View Highscores' to see the highscore";
   }
-}
-submitBtn.onclick = saveScore;
+  else {
+    endScreenEl.setAttribute('class', 'show');
+  }
+  });
+
 startBtn.addEventListener('click', startQuiz);
+
