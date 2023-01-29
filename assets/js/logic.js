@@ -15,6 +15,8 @@ let counter = questionsArray.length*15;
 let questionIndex = 0;
 let score = 0;
 let btn = [];
+const correct = new Audio("./assets/sfx/correct.wav");
+const incorrect =new Audio("./assets/sfx/incorrect.wav");
 
 //function to show a question
 function displayQuestion() {
@@ -42,11 +44,13 @@ function displayQuestion() {
      //display the feedback
       feedbackEl.setAttribute('class', 'feedback show');
       if(event.target.value !== currentQuestion.answer) {
-        feedbackEl.textContent = "Wrong!";
+        feedbackEl.textContent = " :-( Wrong!";
         counter -= 10;
+        incorrect.play();
         }else {
-            feedbackEl.textContent = "Right!";
+            feedbackEl.textContent = "AWESOME!! Your answer is Right";
             score++;
+            correct.play();
             }
             setTimeout(displayQuestion, 1000);
             questionIndex++;
@@ -118,7 +122,7 @@ submitBtn.addEventListener('click', function(event){
   
     endScreenEl.setAttribute('class', 'hide');
     feedbackEl.setAttribute('class', 'feedback show');
-    feedbackEl.textContent = "Thanks! Click 'View Highscores' to see the highscore";
+    feedbackEl.textContent = "Thanks!! Click 'View Highscores' on top left to see the highscore";
   }
   
   });

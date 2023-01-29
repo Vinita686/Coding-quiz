@@ -13,3 +13,9 @@ preSavedScore.forEach(function(ev) {
     listEl.textContent = ev.Initials + "  = " + ev.Score;
     highScoreEl.appendChild(listEl);
 }); 
+//function to clear all saved scores
+function clearAll() {
+    highScoreEl.innerHTML = '';
+    localStorage.removeItem('scoreDetail');
+}
+clearBtnEl.onclick = clearAll;
