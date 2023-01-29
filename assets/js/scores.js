@@ -5,13 +5,11 @@ var clearBtnEl = document.getElementById("clear");
 //function to show saved highscores list
 // function showHighscore(){
 //get previously saved score from the local stoarge.
-let preSavedScore = localStorage.getItem(JSON.parse("scoreDetail"));
+let preSavedScore = JSON.parse(localStorage.getItem("scoreDetail"));
 console.log(preSavedScore);
 //create list of saved highscores
-preSavedScore.forEach(function(score) {
+preSavedScore.forEach(function(ev) {
     let listEl = document.createElement('li');
-    listEl.textContent = preSavedScore;
+    listEl.textContent = ev.Initials + "  = " + ev.Score;
     highScoreEl.appendChild(listEl);
 }); 
-// }
-// showHighscore(s);

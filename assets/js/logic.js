@@ -29,20 +29,18 @@ function displayQuestion() {
     questionTitle.textContent = '';
     endQuiz();
    }  
-
    //loop over choices for answer
-    currentQuestion.choices.forEach(function(option, i) {
-     //create button to each option
-     btn[i]= document.createElement("button");
-     btn[i].textContent = i + 1 + "." + option;
-     btn[i].setAttribute('value', option);
-     choiceOfAnswer.appendChild(btn[i]);
+   //create button to each option
+    currentQuestion.choices.forEach(function(element, i) {
+      btn[i]= document.createElement("button");
+      btn[i].textContent = i + 1 + "." + element;
+      btn[i].setAttribute('value', element);
+      choiceOfAnswer.appendChild(btn[i]);
 
-     //attach click event listner to each choice for answer
-     btn[i].addEventListener('click', function(event) {
-
+      //attach click event listner to each choice for answer
+      btn[i].addEventListener('click', function(event) {
      //display the feedback
-      feedbackEl.setAttribute('class', 'show');
+      feedbackEl.setAttribute('class', 'feedback show');
       if(event.target.value !== currentQuestion.answer) {
         feedbackEl.textContent = "Wrong!";
         counter -= 10;
@@ -117,13 +115,12 @@ submitBtn.addEventListener('click', function(event){
     saveScores.push(userInputs);
     // console.log(highScoreArray);
     localStorage.setItem("scoreDetail", JSON.stringify(saveScores));
+  
     endScreenEl.setAttribute('class', 'hide');
     feedbackEl.setAttribute('class', 'feedback show');
     feedbackEl.textContent = "Thanks! Click 'View Highscores' to see the highscore";
   }
-  else {
-    endScreenEl.setAttribute('class', 'show');
-  }
+  
   });
 
 startBtn.addEventListener('click', startQuiz);
