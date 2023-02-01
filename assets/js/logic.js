@@ -44,19 +44,19 @@ function displayQuestion() {
 				counter -= 10;
 				incorrect.play();
 				}else {
-						feedbackEl.textContent = "AWESOME!! Your answer is Right";
-						score++;
-						correct.play();
-						}
-						setTimeout(displayQuestion, 1000);
-						questionIndex++;
-				})
+					feedbackEl.textContent = "AWESOME!! Your answer is Right";
+					score++;
+					correct.play();
+					}
+					setTimeout(displayQuestion, 1000);
+					questionIndex++;
+				});
 		});
 
-		} else {
+	} else {
 		questionTitle.textContent = '';
-		endQuiz();
-	 }  
+		endQuiz()
+	}  
 
 }
 
@@ -78,6 +78,7 @@ function displayQuestion() {
 		}, 1000)
 };
 
+//function to end the quiz
 function endQuiz() {
 	if (questionIndex === questionsArray.length || counter === 0) {
 		counter = "";

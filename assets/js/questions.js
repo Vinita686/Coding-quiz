@@ -19,7 +19,11 @@ var questionsArray = [
         choices: ["css", "class", "src", "style"],
         answer: "style"
     },
-    
+    {
+        question: "q.5 Which of the following function of Array object removes the last element from an array and returns that element? ",
+        choices: ["push()", "delete()", "pop()", "link()"],
+        answer: "pop()"
+    },
     
 
 ];
