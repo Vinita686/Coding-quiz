@@ -20,7 +20,8 @@ It's done WHEN:
 
 ### Mock-Up :
 
-![Coding-Quiz](/assets/images/Coding Quiz.gif)
+![Coding Quiz](https://user-images.githubusercontent.com/119357556/216356732-1a1a802a-e437-49dc-bde5-5f9fcdc6e60f.gif)
+
 
 
 
