@@ -72,7 +72,7 @@ function displayQuestion() {
  var timeInterval = setInterval(function() {
 		timeEl.textContent = counter;
 		counter--;
-		if (counter < 0) {
+		if (counter <= 0) {
 				clearInterval(timeInterval);
 				}
 		}, 1000)
@@ -80,6 +80,7 @@ function displayQuestion() {
 
 //function to end the quiz
 function endQuiz() {
+	
 	if (questionIndex === questionsArray.length || counter === 0) {
 		counter = "";
 		questionsEl.setAttribute('class', 'hide')
@@ -99,7 +100,8 @@ function lettersOnlyCheck(input) {
 	 else
 		 {
 		 alert("Please enter letters only.");
-		 return false;
+		 
+		 return false;	 
 		 }
 };   
 //capture final score and initials and store them to local storage
