@@ -1,5 +1,6 @@
 # Coding-quiz
-## Description : This application allows the user to take a timed quiz on javaScript fundamentals,
+## Description : 
+This application allows the user to take a timed quiz on javaScript fundamentals,
 that has multipleChoice questions and stores highscores. This app will run in the browser and will feature dynamically updated HTML and CSS powered by JavaScript. It has a clean, polished and responsive user interface.
 
 ## Use Story 
@@ -14,6 +15,13 @@ It's done WHEN:
 - If the answer clicked was incorrect then subtract time from the clock.
 - The quiz should end when all questions are answered or the timer reaches 0.
 - When the game ends, it should display their score and give the user the ability to save their initials and their score.
+
+### Deployed Application : 
+
+### Mock-Up :
+
+![Coding Quiz](/assets/images/Coding Quiz.gif)
+
 
 
 
